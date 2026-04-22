@@ -90,7 +90,7 @@ class DataIngestion:
       dataframe = self.export_data_feature_store(dataframe)
       self.split_data_as_train_test(dataframe)
       data_ingestion_artifact = DataIngestionArtifact(trained_file_path = self.data_ingestion_config.training_file_path,
-                                                      tested_file_path = self.data_ingestion_config.testing_file_path)
+                                                      test_file_path = self.data_ingestion_config.testing_file_path)
       return data_ingestion_artifact
 
     except Exception as e:
