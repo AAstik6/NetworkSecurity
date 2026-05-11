@@ -22,6 +22,12 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import r2_score
 import mlflow
 
+import dagshub
+dagshub.init(repo_owner='aastik829', repo_name='NetworkSecurity', mlflow=True)
+
+
+
+
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig, data_transformation_artifact:DataTransformationArtifact):
         try:
@@ -93,6 +99,7 @@ class ModelTrainer:
 
         classification_train_metric = get_classification_score(y_true=y_train, y_pred=y_train_pred)
 
+
         ## Track the experiments with mlflow
         self.track_mlflow(classification_metric=classification_train_metric, best_model=best_model)
 
@@ -109,6 +116,8 @@ class ModelTrainer:
 
         Network_Model=NetworkModel(preprocessor=preprocessor,model=best_model)
         save_object(self.model_trainer_config.trained_model_file_path,obj=NetworkModel)
+
+        save_object('final_model/model.pkl', best_model)
 
         ## Model Trainer Artifact
         model_trainer_artifact=ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_file_path,
