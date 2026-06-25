@@ -3,7 +3,7 @@
 ## (locally or on an AWS server), it has everything it needs to work.
 
 FROM python:3.10-slim-buster
-WORKDIR /app
+WORKDIR /app 
 COPY . /app
 
 RUN pip install -r requirements.txt
